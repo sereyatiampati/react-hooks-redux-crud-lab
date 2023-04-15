@@ -1,26 +1,26 @@
 import { v4 as uuid } from "uuid";
 import { createSlice } from "@reduxjs/toolkit";
 
-const restaurantsSlice = createSlice({
-  name: "restaurants",
+const reviewsSlice = createSlice({
+  name: "reviews",
   initialState: {
     entities: [],
   },
   reducers: {
-    restaurantAdded(state, action){
+    reviewAdded(state, action){
       state.entities.push({
         id: uuid(),
-        name: action.payload,
-        
+        comment: action.payload.comment,
+        restaurantId: action.payload.restaurant,
       });
     },
-      restaurantRemoved(state, action){
+      reviewRemoved(state, action){
         const index = state.entities.findIndex(res => res.id === action.payload)
         state.entities.splice(index, 1)
       }
   },
 });
 
-export const {restaurantAdded, restaurantRemoved} = restaurantsSlice.actions
+export const {reviewAdded, reviewRemoved} = reviewsSlice.actions
 
-export default restaurantsSlice.reducer;
+export default reviewsSlice.reducer;
